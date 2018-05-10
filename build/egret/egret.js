@@ -966,6 +966,7 @@ var egret;
          * 设置x坐标
          */
         DisplayObject.prototype.$setX = function (value) {
+            value = +value || 0;
             var self = this;
             if (self.$x == value) {
                 return false;
