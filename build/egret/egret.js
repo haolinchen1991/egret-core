@@ -1032,6 +1032,7 @@ var egret;
          * 设置y坐标
          */
         DisplayObject.prototype.$setY = function (value) {
+            value = +value || 0;
             var self = this;
             if (self.$y == value) {
                 return false;
