@@ -1,8 +1,8 @@
 {
   "name": "egret",
-  "version": "5.1.11-fla",
+  "version": "5.2.0",
   "private": true,
-  "author": "fla",
+  "author": "egret-labs",
   "bin": {
     "egret": "./tools/bin/egret"
   },

@@ -49,6 +49,9 @@ var ExmlPlugin = /** @class */ (function () {
                 if (filename.indexOf('.exml') >= 0) {
                     contents = file.contents.toString();
                     this.exmls.push({ filename: filename, contents: contents });
+                    if (this.publishPolicy != "debug") {
+                        return [2 /*return*/, null];
+                    }
                 }
                 return [2 /*return*/, file];
             });
@@ -67,7 +70,7 @@ var ExmlPlugin = /** @class */ (function () {
                 }
                 result = exml.publishEXML(this.exmls, this.publishPolicy);
                 if (result.EuiJson !== undefined) {
-                    pluginContext.createFile("resource/gameEui.bin", new Buffer("" + result.EuiJson));
+                    pluginContext.createFile("resource/gameEui.json", new Buffer("" + result.EuiJson));
                 }
                 result.files.forEach(function (item) {
                     var filename = item.path.split("\\").join("/");

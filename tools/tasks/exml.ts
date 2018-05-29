@@ -14,7 +14,7 @@ export class ExmlPlugin implements Plugin {
 
     exmls: { filename: string, contents: string }[] = [];
 
-    constructor(public publishPolicy: string) {
+    constructor(private publishPolicy: string) {
 
 
     }
@@ -22,7 +22,10 @@ export class ExmlPlugin implements Plugin {
         const filename = file.origin;
         if (filename.indexOf('.exml') >= 0) {
             const contents = file.contents.toString()
-            this.exmls.push({ filename, contents })
+            this.exmls.push({ filename, contents });
+            if (this.publishPolicy != "debug") {
+                return null;
+            }
         }
         return file;
     }
@@ -38,7 +41,7 @@ export class ExmlPlugin implements Plugin {
         }
         const result = exml.publishEXML(this.exmls, this.publishPolicy);
         if (result.EuiJson !== undefined) {
-            pluginContext.createFile("resource/gameEui.bin", new Buffer(`${result.EuiJson}`));
+            pluginContext.createFile("resource/gameEui.json", new Buffer(`${result.EuiJson}`));
         }
         result.files.forEach(item => {
             const filename = item.path.split("\\").join("/");
