@@ -672,14 +672,16 @@ var RES;
             }
             var currentPid = RES.systemPid;
             var result = method.apply(this, arg);
-            return result.then(function (value) {
-                if (RES.systemPid != currentPid) {
-                    throw new ResourceManagerError(1005, arg[0]);
-                }
-                else {
-                    return value;
-                }
-            });
+            if(result) {
+                return result.then(function (value) {
+                    if (RES.systemPid != currentPid) {
+                        throw new ResourceManagerError(1005, arg[0]);
+                    }
+                    else {
+                        return value;
+                    }
+                });
+            }
         };
     };
     function profile() {
@@ -2580,18 +2582,21 @@ var RES;
         };
         Resource.prototype.getResAsync = function (key, compFunc, thisObject) {
             var paramKey = key;
-            var _a = RES.config.getResourceWithSubkey(key, true), r = _a.r, subkey = _a.subkey;
-            return RES.queue.loadResource(r).then(function (value) {
-                RES.host.save(r, value);
-                var p = RES.processor.isSupport(r);
-                if (p && p.getData && subkey) {
-                    value = p.getData(RES.host, r, key, subkey);
-                }
-                if (compFunc) {
-                    compFunc.call(thisObject, value, paramKey);
-                }
-                return value;
-            });
+            var _a = RES.config.getResourceWithSubkey(key);
+            if(_a) {
+                var r = _a.r, subkey = _a.subkey;
+                return RES.queue.loadResource(r).then(function (value) {
+                    RES.host.save(r, value);
+                    var p = RES.processor.isSupport(r);
+                    if (p && p.getData && subkey) {
+                        value = p.getData(RES.host, r, key, subkey);
+                    }
+                    if (compFunc) {
+                        compFunc.call(thisObject, value, paramKey);
+                    }
+                    return value;
+                });
+            }
         };
         /**
          * 通过url获取资源
