@@ -687,6 +687,16 @@ var egret;
             _this.$renderNode = null;
             _this.$renderDirty = false;
             _this.$renderMode = null;
+            /**
+             * @private
+             * chl 添加z变量，跟cocos的zorder机制类似
+             */
+            _this.$zOrder = 0;
+            /**
+             * @private
+             * chl 添加zorder机制
+             */
+            _this.$reorderChildDirty = false;
             if (egret.nativeRender) {
                 _this.createNativeDisplayObject();
             }
@@ -2597,6 +2607,30 @@ var egret;
                 parent = parent.$parent;
             }
             return false;
+        };
+        Object.defineProperty(DisplayObject.prototype, "zOrder", {
+            get: function () {
+                return this.$zOrder;
+            },
+            set: function (value) {
+                if (value == this.$zOrder)
+                    return;
+                this.$zOrder = value;
+                if (this.$parent) {
+                    this.$parent.reorderChild();
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        DisplayObject.prototype.reorderChild = function () {
+            this.$reorderChildDirty = true;
+        };
+        // chl 扩展
+        DisplayObject.prototype.removeFromParent = function () {
+            if (this.$parent && this.$parent.contains(this)) {
+                this.$parent.removeChild(this);
+            }
         };
         /**
          * @private

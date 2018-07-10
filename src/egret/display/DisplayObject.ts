@@ -2207,6 +2207,43 @@ namespace egret {
             return false;
         }
 
+        /**
+         * @private
+         * chl 添加z变量，跟cocos的zorder机制类似
+         */
+        $zOrder: number = 0;
+
+        public get zOrder(): number {
+            return this.$zOrder;
+        }
+
+        public set zOrder(value: number) {
+            if (value == this.$zOrder)
+                return;
+            
+            this.$zOrder = value;
+            if (this.$parent) {
+                this.$parent.reorderChild();
+            }
+        }
+
+        /**
+         * @private
+         * chl 添加zorder机制
+         */
+        $reorderChildDirty: boolean = false;
+
+        public reorderChild() {
+            this.$reorderChildDirty = true;
+        }
+
+        // chl 扩展
+        public removeFromParent() {
+            if(this.$parent && this.$parent.contains(this)){
+                this.$parent.removeChild(this)
+            }
+        }
+
     }
 
 }

@@ -1290,6 +1290,19 @@ declare namespace egret {
          * @platform Web,Native
          */
         willTrigger(type: string): boolean;
+        /**
+         * @private
+         * chl 添加z变量，跟cocos的zorder机制类似
+         */
+        $zOrder: number;
+        zOrder: number;
+        /**
+         * @private
+         * chl 添加zorder机制
+         */
+        $reorderChildDirty: boolean;
+        reorderChild(): void;
+        removeFromParent(): void;
     }
 }
 declare namespace egret {

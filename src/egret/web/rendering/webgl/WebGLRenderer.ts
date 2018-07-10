@@ -146,6 +146,12 @@ namespace egret.web {
             }
             let children = displayObject.$children;
             if (children) {
+                if (displayObject.$reorderChildDirty) {
+                    displayObject.$reorderChildDirty = false
+                    children.sort((a, b) => {
+                        return a.$zOrder - b.$zOrder
+                    })
+                }
                 let length = children.length;
                 for (let i = 0; i < length; i++) {
                     let child = children[i];

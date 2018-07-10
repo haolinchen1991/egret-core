@@ -6959,6 +6959,12 @@ var egret;
                 }
                 var children = displayObject.$children;
                 if (children) {
+                    if (displayObject.$reorderChildDirty) {
+                        displayObject.$reorderChildDirty = false;
+                        children.sort(function (a, b) {
+                            return a.$zOrder - b.$zOrder;
+                        });
+                    }
                     var length_4 = children.length;
                     for (var i = 0; i < length_4; i++) {
                         var child = children[i];
