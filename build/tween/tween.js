@@ -812,6 +812,10 @@ var egret;
             for (var i = tweens.length - 1; i >= 0; i--) {
                 if (tweens[i]._target == target) {
                     tweens[i].paused = true;
+                    // chl 回调call
+                    var lastStep = tweens[i]._steps[tweens[i]._steps.length - 1];
+                    if (lastStep.needCBWhenRemove)
+                        lastStep.f.apply(lastStep.o, lastStep.p);
                     tweens.splice(i, 1);
                 }
             }
@@ -1334,10 +1338,11 @@ var egret;
          * </pre>
          * @language zh_CN
          */
-        Tween.prototype.call = function (callback, thisObj, params) {
+        Tween.prototype.call = function (callback, thisObj, params, needCBWhenRemove) {
             if (thisObj === void 0) { thisObj = undefined; }
             if (params === void 0) { params = undefined; }
-            return this._addAction({ f: callback, p: params ? params : [], o: thisObj ? thisObj : this._target });
+            if (needCBWhenRemove === void 0) { needCBWhenRemove = undefined; }
+            return this._addAction({ f: callback, p: params ? params : [], o: thisObj ? thisObj : this._target, needCBWhenRemove: needCBWhenRemove });
         };
         /**
          * Now modify the properties of the specified object to the specified value

@@ -878,7 +878,7 @@ declare namespace egret {
          * </pre>
          * @language zh_CN
          */
-        call(callback: Function, thisObj?: any, params?: any[]): Tween;
+        call(callback: Function, thisObj?: any, params?: any[], needCBWhenRemove?: any): Tween;
         /**
          * Now modify the properties of the specified object to the specified value
          * @param props {Object} Property set of an object

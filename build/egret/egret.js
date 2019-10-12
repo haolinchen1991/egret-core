@@ -629,7 +629,9 @@ var egret;
             _this.$x = 0;
             _this.$y = 0;
             _this.$scaleX = 1;
+            _this.$originScaleX = undefined;
             _this.$scaleY = 1;
+            _this.$originScaleY = undefined;
             _this.$rotation = 0;
             _this.$skewX = 0;
             _this.$skewXdeg = 0;
@@ -1111,6 +1113,15 @@ var egret;
             },
             set: function (value) {
                 this.$setScaleX(value);
+                if (!this.$originScaleX)
+                    this.$originScaleX = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(DisplayObject.prototype, "originScaleX", {
+            get: function () {
+                return this.$originScaleX;
             },
             enumerable: true,
             configurable: true
@@ -1172,6 +1183,15 @@ var egret;
             },
             set: function (value) {
                 this.$setScaleY(value);
+                if (!this.$originScaleY)
+                    this.$originScaleY = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(DisplayObject.prototype, "originScaleY", {
+            get: function () {
+                return this.$originScaleY;
             },
             enumerable: true,
             configurable: true
@@ -21594,6 +21614,22 @@ var egret;
                     textArr = [];
                 for (var i = 0; i < textArr.length; i++) {
                     var element = textArr[i];
+                    /**
+                     * @usage 修复真机textFlow换行闪退（非必现）
+                     * 将当前行末是回车的放到下一行开头
+                     *
+                     * Jan 10, 2019 7:16 PM
+                     * @author CHLINXXOO <haolin.chen1991@gmail.com>
+                     */
+                    if (element.text) {
+                        var startIndex = element.text.search('[\n]+$');
+                        if (startIndex > 0) {
+                            if (textArr[i + 1]) {
+                                textArr[i + 1].text = element.text.substring(startIndex) + textArr[i + 1].text;
+                            }
+                            element.text = element.text.substring(0, startIndex);
+                        }
+                    }
                     text += element.text;
                 }
                 if (this.$TextField[20 /* displayAsPassword */]) {

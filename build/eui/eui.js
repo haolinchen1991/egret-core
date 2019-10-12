@@ -12527,7 +12527,7 @@ var eui;
             /**
              * @private
              */
-            _this._slideDuration = 500;
+            _this._slideDuration = 0;
             /**
              * @private
              */
@@ -18384,7 +18384,7 @@ var eui;
                         scrollPos = 0;
                     }
                     else {
-                        scrollPos -= disMove * 0.5;
+                        scrollPos -= disMove * 0.8;
                     }
                 }
                 if (scrollPos > maxScrollValue) {
@@ -18392,7 +18392,7 @@ var eui;
                         scrollPos = maxScrollValue;
                     }
                     else {
-                        scrollPos -= disMove * 0.5;
+                        scrollPos -= disMove * 0.8;
                     }
                 }
                 this.currentScrollPos = scrollPos;

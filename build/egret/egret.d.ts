@@ -590,6 +590,7 @@ declare namespace egret {
          */
         $setY(value: number): boolean;
         private $scaleX;
+        private $originScaleX;
         /**
          * Indicates the horizontal scale (percentage) of the object as applied from the registration point. <br/>
          * The default 1.0 equals 100% scale.
@@ -607,6 +608,7 @@ declare namespace egret {
          * @language zh_CN
          */
         scaleX: number;
+        readonly originScaleX: number;
         /**
          * @private
          *
@@ -619,6 +621,7 @@ declare namespace egret {
          */
         $setScaleX(value: number): void;
         private $scaleY;
+        private $originScaleY;
         /**
          * Indicates the vertical scale (percentage) of an object as applied from the registration point of the object.
          * 1.0 is 100% scale.
@@ -635,6 +638,7 @@ declare namespace egret {
          * @language zh_CN
          */
         scaleY: number;
+        readonly originScaleY: number;
         /**
          * @private
          *
