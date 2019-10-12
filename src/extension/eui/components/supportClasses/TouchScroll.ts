@@ -221,7 +221,7 @@ namespace eui.sys {
                     scrollPos = 0;
                 }
                 else {
-                    scrollPos -= disMove * 0.5;
+                    scrollPos -= disMove * 0.8;
                 }
             }
             if (scrollPos > maxScrollValue) {
@@ -229,7 +229,7 @@ namespace eui.sys {
                     scrollPos = maxScrollValue;
                 }
                 else {
-                    scrollPos -= disMove * 0.5;
+                    scrollPos -= disMove * 0.8;
                 }
             }
             this.currentScrollPos = scrollPos;

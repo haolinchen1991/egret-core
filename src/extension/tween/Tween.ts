@@ -195,6 +195,12 @@ namespace egret {
             for (let i = tweens.length - 1; i >= 0; i--) {
                 if (tweens[i]._target == target) {
                     tweens[i].paused = true;
+
+                    // chl 回调call
+                    let lastStep = tweens[i]._steps[tweens[i]._steps.length - 1]
+                    if (lastStep.needCBWhenRemove)
+                        lastStep.f.apply(lastStep.o, lastStep.p);
+
                     tweens.splice(i, 1);
                 }
             }
@@ -349,7 +355,7 @@ namespace egret {
          * @param props 
          * @param pluginData 
          */
-        private initialize(target:any, props: any, pluginData: any): void {
+        private initialize(target: any, props: any, pluginData: any): void {
             this._target = target;
             if (props) {
                 this._useTicks = props.useTicks;
@@ -394,11 +400,11 @@ namespace egret {
             if (t >= this.duration) {
                 if (this.loop) {
                     var newTime = t % this.duration;
-					if (t > 0 && newTime === 0) {
-						t = this.duration;
-					} else {
-						t = newTime;
-					}
+                    if (t > 0 && newTime === 0) {
+                        t = this.duration;
+                    } else {
+                        t = newTime;
+                    }
                 }
                 else {
                     t = this.duration;
@@ -557,7 +563,7 @@ namespace egret {
          * @language zh_CN
 		 */
         public setPaused(value: boolean): Tween {
-            if(this.paused == value) {
+            if (this.paused == value) {
                 return this;
             }
             this.paused = value;
@@ -751,8 +757,8 @@ namespace egret {
          * </pre>
          * @language zh_CN
 		 */
-        public call(callback: Function, thisObj: any = undefined, params: any[] = undefined): Tween {
-            return this._addAction({ f: callback, p: params ? params : [], o: thisObj ? thisObj : this._target });
+        public call(callback: Function, thisObj: any = undefined, params: any[] = undefined, needCBWhenRemove = undefined): Tween {
+            return this._addAction({ f: callback, p: params ? params : [], o: thisObj ? thisObj : this._target, needCBWhenRemove: needCBWhenRemove });
         }
 
         /**

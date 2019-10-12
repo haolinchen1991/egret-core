@@ -536,6 +536,7 @@ namespace egret {
         }
 
         private $scaleX: number = 1;
+        private $originScaleX: number = undefined;
 
         /**
          * Indicates the horizontal scale (percentage) of the object as applied from the registration point. <br/>
@@ -559,6 +560,12 @@ namespace egret {
 
         public set scaleX(value: number) {
             this.$setScaleX(value);
+            if(!this.$originScaleX)
+                this.$originScaleX = value
+        }
+
+         public get originScaleX(): number {
+            return this.$originScaleX;
         }
 
         /**
@@ -601,6 +608,7 @@ namespace egret {
         }
 
         private $scaleY: number = 1;
+        private $originScaleY: number = undefined;
 
         /**
          * Indicates the vertical scale (percentage) of an object as applied from the registration point of the object.
@@ -623,6 +631,12 @@ namespace egret {
 
         public set scaleY(value: number) {
             this.$setScaleY(value);
+            if(!this.$originScaleY)
+                this.$originScaleY = value
+        }
+
+        public get originScaleY(): number {
+            return this.$originScaleY;
         }
 
         /**

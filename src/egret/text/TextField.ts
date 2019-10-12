@@ -1781,6 +1781,22 @@ namespace egret {
                 textArr = [];
             for (let i: number = 0; i < textArr.length; i++) {
                 let element: egret.ITextElement = textArr[i];
+                /**
+                 * @usage 修复真机textFlow换行闪退（非必现）
+                 * 将当前行末是回车的放到下一行开头
+                 *
+                 * Jan 10, 2019 7:16 PM
+                 * @author CHLINXXOO <haolin.chen1991@gmail.com>
+                 */
+                if (element.text) {
+                    let startIndex = element.text.search('[\n]+$')
+                    if (startIndex > 0) {
+                        if (textArr[i + 1]) {
+                            textArr[i + 1].text = element.text.substring(startIndex) + textArr[i + 1].text
+                        }
+                        element.text = element.text.substring(0, startIndex)
+                    }
+                }
                 text += element.text;
             }
 

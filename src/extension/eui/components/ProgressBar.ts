@@ -183,7 +183,7 @@ namespace eui {
         /**
          * @private
          */
-        private _slideDuration:number = 500;
+        private _slideDuration:number = 0;
 
         /**
          * Duration in milliseconds for a sliding animation
