@@ -1579,19 +1579,8 @@ var egret;
              */
             WebHttpRequest.prototype.onload = function () {
                 var self = this;
-                var xhr = this._xhr;
-                var url = this._url;
-                var ioError = (xhr.status >= 400);
                 window.setTimeout(function () {
-                    if (ioError) {
-                        if (true && !self.hasEventListener(egret.IOErrorEvent.IO_ERROR)) {
-                            egret.$error(1011, url);
-                        }
-                        self.dispatchEventWith(egret.IOErrorEvent.IO_ERROR);
-                    }
-                    else {
-                        self.dispatchEventWith(egret.Event.COMPLETE);
-                    }
+                    self.dispatchEventWith(egret.Event.COMPLETE);
                 }, 0);
             };
             /**
