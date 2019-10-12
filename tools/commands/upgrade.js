@@ -13,8 +13,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -70,7 +70,13 @@ var UpgradeCommand = /** @class */ (function () {
                             { "v": "5.1.1", command: Upgrade_5_1_1 },
                             { "v": "5.1.2", command: Upgrade_5_1_2 },
                             { "v": "5.2.13", command: Upgrade_5_2_13 },
-                            { "v": "5.2.15" }
+                            { "v": "5.2.17", command: Upgrade_5_2_17 },
+                            { "v": "5.2.19", command: Upgrade_5_2_19 },
+                            { "v": "5.2.22", command: Upgrade_5_2_22 },
+                            { "v": "5.2.23", command: Upgrade_5_2_23 },
+                            { "v": "5.2.25", command: Upgrade_5_2_25 },
+                            { "v": "5.2.28", command: Upgrade_5_2_28 },
+                            { "v": "5.2.29" }
                         ];
                         _a.label = 1;
                     case 1:
@@ -190,5 +196,104 @@ var Upgrade_5_2_13 = /** @class */ (function () {
         });
     };
     return Upgrade_5_2_13;
+}());
+var Upgrade_5_2_17 = /** @class */ (function () {
+    function Upgrade_5_2_17() {
+    }
+    Upgrade_5_2_17.prototype.execute = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "qgame"), path.join(egret.args.projectDir, "scripts", "qgame"));
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "config.qgame.ts"), path.join(egret.args.projectDir, "scripts", "config.qgame.ts"));
+                return [2 /*return*/, 0];
+            });
+        });
+    };
+    return Upgrade_5_2_17;
+}());
+var Upgrade_5_2_19 = /** @class */ (function () {
+    function Upgrade_5_2_19() {
+    }
+    Upgrade_5_2_19.prototype.execute = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "oppogame"), path.join(egret.args.projectDir, "scripts", "oppogame"));
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "config.oppogame.ts"), path.join(egret.args.projectDir, "scripts", "config.oppogame.ts"));
+                return [2 /*return*/, 0];
+            });
+        });
+    };
+    return Upgrade_5_2_19;
+}());
+var Upgrade_5_2_22 = /** @class */ (function () {
+    function Upgrade_5_2_22() {
+    }
+    Upgrade_5_2_22.prototype.execute = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "vivogame"), path.join(egret.args.projectDir, "scripts", "vivogame"));
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "config.vivogame.ts"), path.join(egret.args.projectDir, "scripts", "config.vivogame.ts"));
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "api.d.ts"), path.join(egret.args.projectDir, "scripts", "api.d.ts"));
+                return [2 /*return*/, 0];
+            });
+        });
+    };
+    return Upgrade_5_2_22;
+}());
+var Upgrade_5_2_23 = /** @class */ (function () {
+    function Upgrade_5_2_23() {
+    }
+    Upgrade_5_2_23.prototype.execute = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "vivogame"), path.join(egret.args.projectDir, "scripts", "vivogame"));
+                return [2 /*return*/, 0];
+            });
+        });
+    };
+    return Upgrade_5_2_23;
+}());
+var Upgrade_5_2_25 = /** @class */ (function () {
+    function Upgrade_5_2_25() {
+    }
+    Upgrade_5_2_25.prototype.execute = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "qqgame"), path.join(egret.args.projectDir, "scripts", "qqgame"));
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "config.qqgame.ts"), path.join(egret.args.projectDir, "scripts", "config.qqgame.ts"));
+                return [2 /*return*/, 0];
+            });
+        });
+    };
+    return Upgrade_5_2_25;
+}());
+var Upgrade_5_2_28 = /** @class */ (function () {
+    function Upgrade_5_2_28() {
+    }
+    Upgrade_5_2_28.prototype.execute = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "vivogame"), path.join(egret.args.projectDir, "scripts", "vivogame"));
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "config.vivogame.ts"), path.join(egret.args.projectDir, "scripts", "config.vivogame.ts"));
+                return [2 /*return*/, 0];
+            });
+        });
+    };
+    return Upgrade_5_2_28;
+}());
+var Upgrade_wxplugin = /** @class */ (function () {
+    function Upgrade_wxplugin() {
+    }
+    Upgrade_wxplugin.prototype.execute = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "wxgame"), path.join(egret.args.projectDir, "scripts", "wxgame"));
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "scripts", "config.wxgame.ts"), path.join(egret.args.projectDir, "scripts", "config.wxgame.ts"));
+                file.copyAsync(path.join(egret.root, "tools", "templates", "empty", "api.d.ts"), path.join(egret.args.projectDir, "scripts", "api.d.ts"));
+                return [2 /*return*/, 0];
+            });
+        });
+    };
+    return Upgrade_wxplugin;
 }());
 module.exports = UpgradeCommand;

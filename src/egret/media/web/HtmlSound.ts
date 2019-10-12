@@ -118,7 +118,9 @@ namespace egret.web {
                 audio.autoplay = !0;
                 audio.muted = true;
             }
-            if (ua.indexOf("edge") >= 0) {//Edge兼容
+            //edge and ie11
+            let ie = ua.indexOf("edge") >= 0 || ua.indexOf("trident") >= 0;
+            if (ie) {
                 document.body.appendChild(audio);
             }
             audio.load();
@@ -128,16 +130,15 @@ namespace egret.web {
             }
 
             function onAudioLoaded(): void {
-                HtmlSound.$recycle(this.url, audio);
+                HtmlSound.$recycle(self.url, audio);
                 removeListeners();
                 if (ua.indexOf("firefox") >= 0) {//火狐兼容
                     audio.pause();
                     audio.muted = false;
                 }
-                if (ua.indexOf("edge") >= 0) {//Edge兼容
+                if (ie) {
                     document.body.appendChild(audio);
                 }
-                
 
                 self.loaded = true;
                 self.dispatchEventWith(egret.Event.COMPLETE);
@@ -151,7 +152,7 @@ namespace egret.web {
             function removeListeners(): void {
                 audio.removeEventListener("canplaythrough", onAudioLoaded);
                 audio.removeEventListener("error", onAudioError);
-                if (ua.indexOf("edge") >= 0) {//Edge兼容
+                if (ie) {
                     document.body.removeChild(audio);
                 }
             }
@@ -192,11 +193,13 @@ namespace egret.web {
          * @inheritDoc
          */
         public close() {
-            if (this.loaded == false && this.originAudio)
+            if (this.loaded && this.originAudio) {
                 this.originAudio.src = "";
+            }
             if (this.originAudio)
                 this.originAudio = null;
             HtmlSound.$clear(this.url);
+            this.loaded = false;
         }
 
         /**
